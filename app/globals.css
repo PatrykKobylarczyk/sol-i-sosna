@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* ---------- Kolory marki (jasny motyw) ---------- */
+:root {
+  --bg: #eef1ef;
+  --surface: #f7f9f8;
+  --ink: #14201d;
+  --muted: #56655f;
+  --line: #d2dbd7;
+  --pine: #1f4a40;
+  --pine-2: #2c6356;
+  --sand: #b89a63;
+  --on-pine: #f1f5f3;
+  --ph-a: #c9d4cf;
+  --ph-b: #9fb3ab;
+  --ph-c: #dccfb4;
+}
+
+/* ---------- Ciemny motyw ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0f1715;
+    --surface: #16211e;
+    --ink: #e4ebe8;
+    --muted: #9aaaa4;
+    --line: #2a3834;
+    --pine: #7db5a6;
+    --pine-2: #9ccabd;
+    --sand: #d6bf8e;
+    --on-pine: #0f1715;
+    --ph-a: #22302c;
+    --ph-b: #34514a;
+    --ph-c: #4a4434;
+  }
+}
+
+/* ---------- Tokeny Tailwinda: bg-bg, text-ink, border-line, bg-pine ... ---------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-pine: var(--pine);
+  --color-pine-2: var(--pine-2);
+  --color-sand: var(--sand);
+  --color-on-pine: var(--on-pine);
+
+  --font-serif: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---------- Zaślepki zdjęć (do podmiany na <Image />) ---------- */
+@layer components {
+  .ph {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    background: linear-gradient(180deg, var(--ph-a) 0 58%, var(--ph-b) 58% 100%);
+  }
+  .ph::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0 11px,
+      color-mix(in srgb, var(--ph-a) 55%, transparent) 11px 12px
+    );
+    mask: linear-gradient(180deg, transparent 58%, #000 58%);
+  }
+  .ph-warm {
+    background: linear-gradient(180deg, var(--ph-c) 0 62%, var(--ph-b) 62% 100%);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+}
